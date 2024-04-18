@@ -1,4 +1,4 @@
-package algorithm.lowerbound;
+package algorithm.binarysearch;
 
 import java.util.Arrays;
 

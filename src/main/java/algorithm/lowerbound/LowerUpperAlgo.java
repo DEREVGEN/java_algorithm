@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class LowerBoundTest {
+public class LowerUpperAlgo {
 
     public static void main(String[] args) throws IOException {
 
@@ -25,44 +25,15 @@ public class LowerBoundTest {
         System.out.print("input target num : ");
         int target = Integer.parseInt(input.readLine());
 
-        int li = lowerBound(target, nums);
-        int ui = upperBound(target, nums);
+        // LowerUpperBound<Integer> lowerUpperBound = new LowerUpperBound<>();
+
+        int li = lowerBound(nums, target);
+        int ui = upperBound(nums, target);
 
         System.out.println("lower bound: " + li + " upper bound: " + ui);
     }
 
-    static int lowerBound(int[] nums, int size, int target) {
-
-        int left = 0, right = size-1;
-
-        while(left < right) {
-            int mid = (left + right) / 2;
-            if (nums[mid] >= target)
-                right = mid-1;
-            else
-                left = mid + 1;
-        }
-
-        return right;
-    }
-
-    static int lower_bound(int a[], int x, int size)
-    {
-
-        // x is the target value or key
-        int l = -1, r = size;
-        while (l + 1 < r)
-        {
-            int m = (l + r) >>> 1;
-            if (a[m] >= x)
-                r = m;
-            else
-                l = m;
-        }
-        return r;
-    }
-
-    static int lowerBound(int key, int[] arr) {
+    static int lowerBound(int[] arr, int key) {
         int start = 0, end = arr.length-1;
         while (start <= end) {
             int mid = (start + end)/2;
@@ -76,8 +47,7 @@ public class LowerBoundTest {
         return start;
     }
 
-    static int upperBound(int key, int[] arr) {
-
+    static int upperBound(int[] arr, int key) {
         int start = 0, end = arr.length-1;
         while (start <= end) {
             int mid = (start + end) / 2;
@@ -86,7 +56,6 @@ public class LowerBoundTest {
             else
                 start = mid + 1;
         }
-
         return end;
     }
 }

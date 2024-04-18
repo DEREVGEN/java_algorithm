@@ -26,7 +26,7 @@ public class Main {
 
     public static int ccw(Point p1, Point p2, Point p3) {
 
-        // res > 0: couter clock, res < 0: clock, res==0:collinear
+        // res < 0: couter clock, res > 0: clock, res==0:collinear
         return (p2.x - p1.x) * (p3.y - p1.y) - (p3.x - p1.x) * (p2.y - p1.y);
     }
 }
@@ -37,5 +37,11 @@ class Point {
     public Point(int y, int x) {
         this.y = y;
         this.x = x;
+    }
+
+    public int ccw(Point p2, Point p3) {
+
+        // res < 0: couter clock, res > 0: clock, res==0:collinear
+        return (p2.x - this.x) * (p3.y - this.y) - (p3.x - this.x) * (p2.y - this.y);
     }
 }

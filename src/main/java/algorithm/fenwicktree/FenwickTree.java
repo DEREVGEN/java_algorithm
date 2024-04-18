@@ -6,34 +6,32 @@ package algorithm.fenwicktree;
 
 public class FenwickTree {
 
-    public static int[] tree;
-
     public static void main(String[] args) {
-        int[] nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] nums = {0, 3, 0, 5, 5, 0, 0, 0};
 
         int N = nums.length;
 
         // 인덱스는 1부터 시작.
-        tree = new int[N+1];
+        int[] tree = new int[N+1];
 
-        buildTree(nums);
+        buildTree(tree, nums);
 
-        for (int k = 1; k <= 10; k++) {
-            for (int i = k; i <= 10; i++) {
-                System.out.print("l: " + k + " r: " + i + " res: " + find(k, i) + "\t");
+        for (int k = 1; k <= N; k++) {
+            for (int i = k; i <= N; i++) {
+                System.out.print("l: " + k + " r: " + i + " res: " + find(tree, k, i) + "\t");
             }
             System.out.println();
         }
     }
 
-    public static void buildTree(int[] nums) {
+    public static void buildTree(int[] tree, int[] nums) {
 
         for (int i = 0; i < nums.length; i++) {
-            update(nums, i+1, nums[i]);
+            update(tree, i+1, nums[i]);
         }
     }
 
-    public static void update(int[] nums, int idx, int val) {
+    public static void update(int[] tree, int idx, int val) {
         while (idx < tree.length) {
             tree[idx] += val;
             /*
@@ -44,11 +42,11 @@ public class FenwickTree {
         }
     }
 
-    public static int find(int l, int r) {
-        return findLeftSum(r) - findLeftSum(l-1);
+    public static int find(int[] tree, int l, int r) {
+        return findLeftSum(tree, r) - findLeftSum(tree,l-1);
     }
 
-    public static int findLeftSum(int idx) {
+    public static int findLeftSum(int[] tree, int idx) {
         int sum = 0;
         while (0 < idx) {
             sum += tree[idx];
@@ -58,7 +56,6 @@ public class FenwickTree {
              */
             idx -= (idx & -idx);
         }
-
         return sum;
     }
 }
